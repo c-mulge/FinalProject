@@ -37,7 +37,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background:orange url("images/paym.jpg") center/cover;
+  background:orange url("images/bg.jpg") center/cover;
   overflow: hidden;
 }
 
@@ -65,7 +65,7 @@ body {
 .card__title {
   font-weight: 600;
   font-size: 2.5rem;
-  color: black;
+  color: #ffffff;
   font-weight: 500;
   margin: 1rem 0 1.5rem;
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
@@ -137,7 +137,7 @@ body {
   
 .pay{
   width:200px;
-  background: #ff7200;
+  background: #3b82f6;;
 
   border:none;
   height: 40px;
@@ -162,7 +162,7 @@ body {
 
 .btn{
   width:200px;
-  background: #ff7200;
+  background: #3b82f6;;
 
   border:none;
   height: 40px;
@@ -186,8 +186,9 @@ body {
 }
 
 .payment{
-  margin-top: -550px;
-  margin-left: 1000px;
+  margin-top: -450px;
+  margin-left: 350px;
+  color: #ffffff;
 }
 </style>
 <?php
@@ -228,7 +229,7 @@ if(isset($_POST['pay'])){
 
 
 
-  <h2 class="payment">TOTAL PAYMENT : <a>₹<?php echo $email['PRICE']?>/-</a></h2>
+  <h4 class="payment">TOTAL PAYMENT : <a>₹<?php echo $email['PRICE']?>/-</a></h4>
 
     <div class="card">
       <form method="POST">
