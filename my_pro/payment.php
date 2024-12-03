@@ -56,6 +56,21 @@ body {
   animation: 1s cubic-bezier(0.16, 1, 0.3, 1) cardEnter;
 }
 
+.bill {
+  margin-left: -150px;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.05)
+  );
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5), -1px -1px 2px #aaa,
+    1px 1px 2px #555;
+  backdrop-filter: blur(0.8rem);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  animation: 1s cubic-bezier(0.16, 1, 0.3, 1) cardEnter;
+}
+
 .card__row {
   display: flex;
   justify-content: space-between;
@@ -229,7 +244,8 @@ if(isset($_POST['pay'])){
 
 
 
-  <h4 class="payment">TOTAL PAYMENT : <a>₹<?php echo $email['PRICE']?>/-</a></h4>
+
+  <h4 class="payment"></h4>
 
     <div class="card">
       <form method="POST">
@@ -280,19 +296,15 @@ if(isset($_POST['pay'])){
         </div>
         <input type="submit" VALUE="PAY NOW" class="pay" name="pay">
         <button class="btn"><a href="cancelbooking.php">CANCEL</a></button>
-        <script>
-               
-          // function myFunction() { 
-          //   let text = "ARE YOU SURE?\nYOU WANT TO CANCEL THE PAYMENT?" 
-          //   if (confirm(text) == true) {
-          //           window.location.href = "cancelbooking.php";
-               
-          //   } 
-            
-          // }
-          </script>
       </form>
       
+    </div>
+    <div class="bill">
+    <h2>Bill Details</h2>
+    <p class="details">Booking ID: <span><?php echo $email['BOOK_ID']; ?></span></p>
+    <p class="details">Customer Email: <span><?php echo $_SESSION['email']; ?></span></p>
+    <p class="details">Total Price: <span>₹<?php echo $email['PRICE']; ?>/-</span></p>
+    <p class="details">Date: <span><?php echo $email['BOOK_DATE']; ?></span></p>
     </div>
   </body>
 

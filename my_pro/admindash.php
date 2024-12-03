@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/addash.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
     <div class="dashboard-container">
-        <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
                 <h2>Admin<span>Panel</span></h2>
@@ -30,52 +30,99 @@
             </div>
         </aside>
 
-        <!-- Main Content Area -->
         <main class="main-content">
-            <!-- Top Navbar -->
             <header class="top-nav">
-                <div class="search-bar">
-                </div>
+                <!-- <div class="search-bar">
+                    <input type="text" id="search" placeholder="Search...">
+                </div> -->
                 <div class="user-profile">
                     <img src="images/admin-avatar.jpg" alt="Admin Profile Picture">
                     <span>Admin</span>
                 </div>
             </header>
 
-            <!-- Dashboard Overview Section -->
             <section class="overview">
                 <h1>Dashboard</h1>
-                <br>
-                <div class="cards">
-                    <div class="card">
+                <div class="stats-container">
+                    <div class="stat">
                         <h3>Total Users</h3>
-                        <p>1,234</p>
+                        <p id="total-users">Loading...</p>
                     </div>
-                    <div class="card">
-                        <h3>Vehicles</h3>
-                        <p>56</p>
+                    <div class="stat">
+                        <h3>Active Vehicles</h3>
+                        <p id="active-vehicles">Loading...</p>
                     </div>
-                    <div class="card">
-                        <h3>Feedback</h3>
-                        <p>78</p>
+                    <div class="stat">
+                        <h3>Feedback Received</h3>
+                        <p id="feedback-received">Loading...</p>
                     </div>
-                    <div class="card">
+                    <div class="stat">
                         <h3>Pending Bookings</h3>
-                        <p>12</p>
+                        <p id="pending-bookings">Loading...</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Feedback Data Table Section -->
-            <!-- <section class="data-section">
-                <h2>Dashboard</h2>
-                <br>
-
-
-
-            </section> -->
+            <section class="details">
+                <h2>Recent Activities</h2>
+                <table id="recent-activities">
+                    <thead>
+                        <tr>
+                            <th>Activity</th>
+                            <th>User</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
         </main>
     </div>
+
+    <script>
+        function fetchDashboardData() {
+            $.ajax({
+                url: 'fetch_dashboard_data.php',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $('#total-users').text(data.totalUsers);
+                    $('#active-vehicles').text(data.activeVehicles);
+                    $('#feedback-received').text(data.feedbackCount);
+                    $('#pending-bookings').text(data.pendingBookings);
+
+                    // Populate recent activities
+                    const activitiesTable = $('#recent-activities tbody');
+                    activitiesTable.empty();
+                    if (data.recentActivities.length > 0) {
+                        data.recentActivities.forEach(activity => {
+                            activitiesTable.append(`
+                                <tr>
+                                    <td>${activity.description}</td>
+                                    <td>${activity.user}</td>
+                                    <td>${activity.date}</td>
+                                </tr>
+                            `);
+                        });
+                    } else {
+                        activitiesTable.append('<tr><td colspan="3">No recent activities</td></tr>');
+                    }
+                },
+                error: function () {
+                    alert('Failed to fetch dashboard data.');
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            fetchDashboardData();
+            setInterval(fetchDashboardData, 60000); // Update data every 60 seconds
+        });
+    </script>
 </body>
 
 </html>
