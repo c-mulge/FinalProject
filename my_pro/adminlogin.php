@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
     <link rel="stylesheet" href="css/adlogin.css">
+    </head>
     <script type="text/javascript">
         function preventBack() {
             window.history.forward();
@@ -13,34 +14,61 @@
         setTimeout("preventBack()", 0);
         window.onunload = function () { null };
     </script>
+    <style>
+        .link {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.link a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.link a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+    </style>
 </head>
 
 <body>
-    <?php
-    require_once('connection.php');
-    if (isset($_POST['adlog'])) {
-        $id = $_POST['adid'];
-        $pass = $_POST['adpass'];
+<?php
+session_start();
+require_once('connection.php');
 
-        if (empty($id) || empty($pass)) {
-            echo '<script>alert("Please fill in all fields")</script>';
-        } else {
-            $query = "SELECT * FROM admin WHERE ADMIN_ID='$id'";
-            $res = mysqli_query($con, $query);
-            if ($row = mysqli_fetch_assoc($res)) {
-                $db_password = $row['ADMIN_PASSWORD'];
-                if ($pass == $db_password) {
-                    echo '<script>alert("Welcome ADMINISTRATOR!");</script>';
-                    header("location: admindash.php");
-                } else {
-                    echo '<script>alert("Incorrect password")</script>';
-                }
+if (isset($_POST['adlog'])) {
+    $id = $_POST['adid'];
+    $pass = $_POST['adpass'];
+
+    if (empty($id) || empty($pass)) {
+        echo '<script>alert("Please fill in all fields")</script>';
+    } else {
+        $query = "SELECT * FROM admin WHERE ADMIN_ID='$id'";
+        $res = mysqli_query($con, $query);
+
+        if ($row = mysqli_fetch_assoc($res)) {
+            $db_password = $row['ADMIN_PASSWORD'];
+            // Verify the password using password_verify
+            if (password_verify($pass, $db_password)) {
+                $_SESSION['admin_logged_in'] = true;
+                $_SESSION['admin_id'] = $id;
+                echo '<script>alert("Welcome ADMINISTRATOR!");</script>';
+                header("location: admindash.php");
+                exit();
             } else {
-                echo '<script>alert("Incorrect User ID")</script>';
+                echo '<script>alert("Incorrect password")</script>';
             }
+        } else {
+            echo '<script>alert("Incorrect User ID")</script>';
         }
     }
-    ?>
+}
+?>
+
+
 
     <div class="container">
         <h2>Admin Login</h2>
@@ -54,6 +82,9 @@
             </div>
             <input type="submit" name="adlog" class="btnn" value="LOGIN">
         </form>
+            <p class="link">Don't have an account?<br>
+                <a href="adreg.php">Sign up</a> here
+            </p>
     </div>
 </body>
 

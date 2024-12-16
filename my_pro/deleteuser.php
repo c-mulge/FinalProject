@@ -1,6 +1,7 @@
 <?php
 
 require_once('connection.php');
+include('authentication.php');
 $email=$_GET['id'];
 
 $sql="DELETE from users where EMAIL='$email'";

@@ -1,3 +1,5 @@
+
+<?php include('authentication.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +28,7 @@
                 </ul>
             </nav>
             <div class="logout">
-                <a href="index.php"> Logout</a>
+                <a href="logout.php"> Logout</a>
             </div>
         </aside>
 
@@ -46,19 +48,19 @@
                 <div class="stats-container">
                     <div class="stat">
                         <h3>Total Users</h3>
-                        <p id="total-users">Loading...</p>
+                        <p id="total-users">...</p>
                     </div>
                     <div class="stat">
                         <h3>Active Vehicles</h3>
-                        <p id="active-vehicles">Loading...</p>
+                        <p id="active-vehicles">...</p>
                     </div>
                     <div class="stat">
                         <h3>Feedback Received</h3>
-                        <p id="feedback-received">Loading...</p>
+                        <p id="feedback-received">...</p>
                     </div>
                     <div class="stat">
                         <h3>Pending Bookings</h3>
-                        <p id="pending-bookings">Loading...</p>
+                        <p id="pending-bookings">...</p>
                     </div>
                 </div>
             </section>
@@ -75,7 +77,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="3">Loading...</td>
+                            <td colspan="3">...</td>
                         </tr>
                     </tbody>
                 </table>

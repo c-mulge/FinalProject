@@ -1,9 +1,11 @@
 <?php 
     require_once('connection.php');
-        session_start();
+    include('user_auth.php');
+        // session_start();
 
     $value = $_SESSION['email'];
     $_SESSION['email'] = $value;
+    // $value=$_POST['email'];
     
     $sql="select * from users where EMAIL='$value'";
     $name = mysqli_query($con,$sql);
@@ -37,8 +39,8 @@
                 <li><a href="contactus.html">CONTACT</a></li>
                 <li><a href="feedback/Feedbacks.php">FEEDBACK</a></li>
                 <li><a href="bookinstatus.php">BOOKING STATUS</a></li>
-                <li><a class="button" href="index.php">LOGOUT</a></li>
-                <li><span class="phello"><strong><?php echo $rows['FNAME'] . " " . $rows['LNAME']; ?></strong></span></li>
+                <li><a class="button" href="logout.php">LOGOUT</a></li>
+                <li><a href="profile.php" class="phello"><strong><?php echo $rows['FNAME'] . " " . $rows['LNAME']; ?></strong></a></li>
                 
             </ul>
         </div>

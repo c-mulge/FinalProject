@@ -1,3 +1,4 @@
+<?php include('user_auth.php')?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,7 +105,7 @@
 <body>
     <?php
         require_once('connection.php');
-        session_start();
+        // session_start();
         $email = $_SESSION['email'];
 
         // Fetch user details

@@ -1,4 +1,5 @@
 <?php
+include('authentication.php');
 if(isset($_POST['addcar']) ){
     require_once('connection.php');
    echo "<prev>";

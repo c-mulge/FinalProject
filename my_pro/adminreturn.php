@@ -1,6 +1,7 @@
 <?php
 
 require_once('connection.php');
+include('authentication.php');
 $carid=$_GET['id'];
 $book_id=$_GET['bookid'];
 $sql2="SELECT *from booking where BOOK_Id=$book_id";

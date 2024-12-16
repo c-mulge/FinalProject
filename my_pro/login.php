@@ -17,6 +17,7 @@
 
 <body>
     <?php
+    session_start();
     require_once('connection.php');
     if (isset($_POST['login'])) {
         $email = $_POST['email'];
@@ -30,9 +31,11 @@
             if ($row = mysqli_fetch_assoc($res)) {
                 $db_password = $row['PASSWORD'];
                 if (md5($pass) == $db_password) {
-                    session_start();
+                    // session_start();
+                    $_SESSION['user_logged_in'] = true;
                     $_SESSION['email'] = $email;
                     header("Location: cardetails.php");
+                    exit();
                 } else {
                     echo '<script>alert("Incorrect password. Please try again.")</script>';
                 }

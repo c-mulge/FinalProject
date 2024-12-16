@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-
+include('authentication.php');
 // Include your database connection
 $con = mysqli_connect('127.0.0.1:3307', 'root', '', 'carproject');
 if (!$con) {

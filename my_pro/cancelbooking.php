@@ -53,7 +53,7 @@
 </body>
 </html> -->
 
-
+<?php include('user_auth.php')?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -147,7 +147,7 @@
 <?php
 	
     require_once('connection.php');
-    session_start();
+    // session_start();
     $bid = $_SESSION['bid'];
     if(isset($_POST['cancelnow'])){
         $del = mysqli_query($con,"delete from booking where BOOK_ID = '$bid' order by BOOK_ID DESC limit 1");

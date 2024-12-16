@@ -1,3 +1,4 @@
+<?php include('authentication.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -176,7 +177,7 @@ button a {
     <div class="dashboard-container">
         <div class="navbar">
             <div class="logo">
-                <h2>CaRs</h2>
+                <h2>CaRental</h2>
             </div>
             <div class="menu">
                 <ul>
